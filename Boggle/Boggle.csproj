@@ -46,6 +46,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="InternalBoardClass.cs" />
+    <Compile Include="RandomLettersClass.cs" />
+    <Compile Include="PlayerClass.cs" />
     <Compile Include="frmBoggle.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -81,10 +84,14 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="bin\Debug\Image\boggle_title.png" />
+    <None Include="bin\Debug\Image\boggle_title.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="bin\Debug\Image\Boggle_set.png" />
+    <None Include="bin\Debug\Image\Boggle_set.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
