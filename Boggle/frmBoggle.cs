@@ -15,6 +15,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows.Forms;
 
 namespace Boggle
@@ -23,14 +24,19 @@ namespace Boggle
     {
         PlayerClass player; //create object instance of player
         private RandomLettersClass RandObj = new RandomLettersClass(); //random letter generator for boggle board
-        bool timesUp = false;
+        private InternalBoardClass Board = new InternalBoardClass(); // the boggle board internally
+        private System.Timers.Timer turnTimer; // the timer
 
         // Constants
         private const int BOGGLEBOARDSIZE = 4;
 
+        string wordList = ""; // just used to display all the words entered by the user
+
         // Total width and height of a board cell
         int barWidth = 2; // Width or thickness of horizontal and vertical bars
         int padding = 5;
+
+        int countDown = 60; // the count down for the timer
 
         // 4x4 2D Array of buttons
         private Button[,] newButton = new Button[BOGGLEBOARDSIZE, BOGGLEBOARDSIZE];
@@ -44,6 +50,8 @@ namespace Boggle
 
         private void createBoggleBoardOnForm() //shows boggle board panel and calls method that creates dynamic boggle board controls
         {
+            txtEnterWords.Enabled = true;
+            btnSubmit.Enabled = true;
             pnlBoard.Visible = true;
             createBoard();
         } // end createBoggleBoardOnForm
@@ -72,7 +80,10 @@ namespace Boggle
                     newButton[row, col].Font = new Font("Arial", 24, FontStyle.Bold);
                     newButton[row, col].Enabled = true;
                     newButton[row, col].Font = new Font("Arial", 24, FontStyle.Bold);
-                    newButton[row, col].Text = RandObj.getNextRandomLetter().ToString();
+                    string ranChar = RandObj.getNextRandomLetter().ToString(); // assigns a sting to input into the button text and internal board
+                    newButton[row, col].Text = ranChar;
+
+                    Board.fillBoard(ranChar); // fills internal board
 
                     newButton[row, col].Name = "btn" + row.ToString() + col.ToString();
 
@@ -85,18 +96,56 @@ namespace Boggle
                 } // end for col
                 // One row now complete
             } // end for row
+            setTimer();
         } // end createBoard
 
         //******END CREATING BOGGLE BOARD*****//
 
         private void setTimer()
         {
-          
+
+            // sets timer for one second.
+            turnTimer = new System.Timers.Timer(1000);
+            // Hook up the Elapsed event for the timer.
+            turnTimer.Elapsed += EndTurn;
+            turnTimer.Enabled = true;
+
+            string text = Convert.ToString(countDown);
+            lblTimer.Invoke(new Action(() => lblTimer.Text = text));
+
+        }
+
+        private void EndTurn(Object source, ElapsedEventArgs e) // event that occurs every seconed
+        {
+            if (countDown > 1)
+            {
+                countDown--;
+                string text = Convert.ToString(countDown);
+                lblTimer.Invoke(new Action(() => lblTimer.Text = text));
+            }
+            else
+            {
+                countDown--;
+                string text = Convert.ToString(countDown);
+                lblTimer.Invoke(new Action(() => lblTimer.Text = text));
+                turnTimer.Stop();
+
+                timesUp();
+            }
+        }
+
+        private void timesUp() // event that occurs when timer hits zero.
+        {
+            txtEnterWords.Invoke(new Action(() => txtEnterWords.Enabled = false));
+            btnSubmit.Invoke(new Action(() => btnSubmit.Enabled = false));
+
+            MessageBox.Show("", "", MessageBoxButtons.OK);
+
         }
 
         private void btnPlay_Click(object sender, EventArgs e)//On Play click, check if name entered, then show game instructions
         {
-            if(txtName.Text == "")
+            if (txtName.Text == "")
             {
                 MessageBox.Show("Please enter a name to continue.",
                       "No name entered.",
@@ -138,10 +187,14 @@ namespace Boggle
                      "Enter a longer word.",
                      MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 //Add word to InternalBoard list and form display list
+                txtEnterWords.Clear();
                 txtEnterWords.Focus();
             }
             else
             {
+                ListViewItem word = new ListViewItem(txtEnterWords.Text, 0);
+                lvUserWords.Items.Add(word);
+                Board.buildWordList(txtEnterWords.Text);
                 txtEnterWords.Clear();
                 txtEnterWords.Focus();
             }
@@ -149,6 +202,9 @@ namespace Boggle
 
         private void btnResetBoard_Click(object sender, EventArgs e) //Start Over Before The Game Ends (Useful for bad boards)
         {
+            turnTimer.Stop();
+            countDown = 60;
+            lvUserWords.Clear();
             pnlBoard.Visible = false;
             pnlBoard.Controls.Clear();
             createBoggleBoardOnForm();
@@ -159,6 +215,6 @@ namespace Boggle
         {
             pnlBoard.Controls.Clear();
         }
-        
+
     }
 }

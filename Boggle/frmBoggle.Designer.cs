@@ -39,16 +39,18 @@
             this.pnlInstructions = new System.Windows.Forms.Panel();
             this.btnStartGame = new System.Windows.Forms.Button();
             this.pnlGameDisplay = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.btnResetBoard = new System.Windows.Forms.Button();
+            this.pnlBoard = new System.Windows.Forms.Panel();
+            this.btnSubmit = new System.Windows.Forms.Button();
             this.lblWordsEntered = new System.Windows.Forms.Label();
             this.dgvWordsEntered = new System.Windows.Forms.DataGridView();
             this.lblTimer = new System.Windows.Forms.Label();
             this.lblTimeLeft = new System.Windows.Forms.Label();
             this.lblEnterWords = new System.Windows.Forms.Label();
             this.txtEnterWords = new System.Windows.Forms.TextBox();
-            this.btnSubmit = new System.Windows.Forms.Button();
-            this.pnlBoard = new System.Windows.Forms.Panel();
-            this.btnResetBoard = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lvUserWords = new System.Windows.Forms.ListView();
+            this.chWords = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             ((System.ComponentModel.ISupportInitialize)(this.pcbxBoggleTitle)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pcbxBoggleSet)).BeginInit();
             this.pnlInstructions.SuspendLayout();
@@ -158,6 +160,7 @@
             // 
             // pnlGameDisplay
             // 
+            this.pnlGameDisplay.Controls.Add(this.lvUserWords);
             this.pnlGameDisplay.Controls.Add(this.label1);
             this.pnlGameDisplay.Controls.Add(this.btnResetBoard);
             this.pnlGameDisplay.Controls.Add(this.pnlBoard);
@@ -173,6 +176,52 @@
             this.pnlGameDisplay.Size = new System.Drawing.Size(700, 484);
             this.pnlGameDisplay.TabIndex = 8;
             this.pnlGameDisplay.Visible = false;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.SystemColors.Window;
+            this.label1.Location = new System.Drawing.Point(151, 463);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(77, 16);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "(Start Over)";
+            // 
+            // btnResetBoard
+            // 
+            this.btnResetBoard.BackColor = System.Drawing.SystemColors.Window;
+            this.btnResetBoard.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnResetBoard.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnResetBoard.Location = new System.Drawing.Point(126, 420);
+            this.btnResetBoard.Name = "btnResetBoard";
+            this.btnResetBoard.Size = new System.Drawing.Size(125, 41);
+            this.btnResetBoard.TabIndex = 12;
+            this.btnResetBoard.Text = "RESET BOARD";
+            this.btnResetBoard.UseVisualStyleBackColor = false;
+            this.btnResetBoard.Click += new System.EventHandler(this.btnResetBoard_Click);
+            // 
+            // pnlBoard
+            // 
+            this.pnlBoard.Location = new System.Drawing.Point(16, 63);
+            this.pnlBoard.Name = "pnlBoard";
+            this.pnlBoard.Size = new System.Drawing.Size(476, 353);
+            this.pnlBoard.TabIndex = 11;
+            this.pnlBoard.Visible = false;
+            // 
+            // btnSubmit
+            // 
+            this.btnSubmit.BackColor = System.Drawing.SystemColors.Window;
+            this.btnSubmit.Enabled = false;
+            this.btnSubmit.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnSubmit.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSubmit.Location = new System.Drawing.Point(457, 16);
+            this.btnSubmit.Name = "btnSubmit";
+            this.btnSubmit.Size = new System.Drawing.Size(125, 41);
+            this.btnSubmit.TabIndex = 10;
+            this.btnSubmit.Text = "ADD WORD";
+            this.btnSubmit.UseVisualStyleBackColor = false;
+            this.btnSubmit.Click += new System.EventHandler(this.btnSubmit_Click);
             // 
             // lblWordsEntered
             // 
@@ -198,11 +247,11 @@
             // 
             this.lblTimer.AutoSize = true;
             this.lblTimer.BackColor = System.Drawing.SystemColors.MenuText;
-            this.lblTimer.Font = new System.Drawing.Font("Tw Cen MT Condensed Extra Bold", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTimer.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTimer.ForeColor = System.Drawing.SystemColors.Window;
             this.lblTimer.Location = new System.Drawing.Point(381, 428);
             this.lblTimer.Name = "lblTimer";
-            this.lblTimer.Size = new System.Drawing.Size(36, 28);
+            this.lblTimer.Size = new System.Drawing.Size(39, 29);
             this.lblTimer.TabIndex = 7;
             this.lblTimer.Text = "60";
             // 
@@ -230,56 +279,28 @@
             // 
             // txtEnterWords
             // 
+            this.txtEnterWords.Enabled = false;
             this.txtEnterWords.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtEnterWords.Location = new System.Drawing.Point(287, 19);
             this.txtEnterWords.Name = "txtEnterWords";
             this.txtEnterWords.Size = new System.Drawing.Size(150, 29);
             this.txtEnterWords.TabIndex = 0;
             // 
-            // btnSubmit
+            // lvUserWords
             // 
-            this.btnSubmit.BackColor = System.Drawing.SystemColors.Window;
-            this.btnSubmit.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.btnSubmit.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSubmit.Location = new System.Drawing.Point(457, 16);
-            this.btnSubmit.Name = "btnSubmit";
-            this.btnSubmit.Size = new System.Drawing.Size(125, 41);
-            this.btnSubmit.TabIndex = 10;
-            this.btnSubmit.Text = "ADD WORD";
-            this.btnSubmit.UseVisualStyleBackColor = false;
-            this.btnSubmit.Click += new System.EventHandler(this.btnSubmit_Click);
+            this.lvUserWords.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.chWords});
+            this.lvUserWords.HideSelection = false;
+            this.lvUserWords.Location = new System.Drawing.Point(513, 112);
+            this.lvUserWords.Name = "lvUserWords";
+            this.lvUserWords.Size = new System.Drawing.Size(182, 369);
+            this.lvUserWords.TabIndex = 14;
+            this.lvUserWords.UseCompatibleStateImageBehavior = false;
+            this.lvUserWords.View = System.Windows.Forms.View.Details;
             // 
-            // pnlBoard
+            // chWords
             // 
-            this.pnlBoard.Location = new System.Drawing.Point(16, 63);
-            this.pnlBoard.Name = "pnlBoard";
-            this.pnlBoard.Size = new System.Drawing.Size(476, 353);
-            this.pnlBoard.TabIndex = 11;
-            this.pnlBoard.Visible = false;
-            // 
-            // btnResetBoard
-            // 
-            this.btnResetBoard.BackColor = System.Drawing.SystemColors.Window;
-            this.btnResetBoard.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.btnResetBoard.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnResetBoard.Location = new System.Drawing.Point(126, 420);
-            this.btnResetBoard.Name = "btnResetBoard";
-            this.btnResetBoard.Size = new System.Drawing.Size(125, 41);
-            this.btnResetBoard.TabIndex = 12;
-            this.btnResetBoard.Text = "RESET BOARD";
-            this.btnResetBoard.UseVisualStyleBackColor = false;
-            this.btnResetBoard.Click += new System.EventHandler(this.btnResetBoard_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.SystemColors.Window;
-            this.label1.Location = new System.Drawing.Point(151, 463);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(77, 16);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "(Start Over)";
+            this.chWords.Text = "Words:";
             // 
             // frmBoggle
             // 
@@ -330,6 +351,8 @@
         private System.Windows.Forms.Panel pnlBoard;
         private System.Windows.Forms.Button btnResetBoard;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ListView lvUserWords;
+        private System.Windows.Forms.ColumnHeader chWords;
     }
 }
 
