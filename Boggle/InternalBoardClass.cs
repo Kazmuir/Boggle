@@ -17,17 +17,24 @@ namespace Boggle
     class InternalBoardClass
     {
         List<String> userWords; //store words the player has entered during the gameplay
-        List<char> board; //holds the 16 characters that make up the current boggle board.
+        List<String> board; //holds the 16 characters that make up the current boggle board.
         int score;
 
         public InternalBoardClass() //empty default constructor
         {
-
+            userWords = new List<string> { };
+            board = new List<string> { };
+            score = 0;
         }
 
-        void fillBoard() //when creating new board, add each character to list
+        public void fillBoard(string letter) //when creating new board, add each character to list
         {
+            board.Add(letter);
+        }
 
+        public void buildWordList(string word)
+        {
+            userWords.Add(word);
         }
     }
 }
