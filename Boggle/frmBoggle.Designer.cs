@@ -39,6 +39,8 @@
             this.pnlInstructions = new System.Windows.Forms.Panel();
             this.btnStartGame = new System.Windows.Forms.Button();
             this.pnlGameDisplay = new System.Windows.Forms.Panel();
+            this.lvUserWords = new System.Windows.Forms.ListView();
+            this.chWords = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label1 = new System.Windows.Forms.Label();
             this.btnResetBoard = new System.Windows.Forms.Button();
             this.pnlBoard = new System.Windows.Forms.Panel();
@@ -49,8 +51,6 @@
             this.lblTimeLeft = new System.Windows.Forms.Label();
             this.lblEnterWords = new System.Windows.Forms.Label();
             this.txtEnterWords = new System.Windows.Forms.TextBox();
-            this.lvUserWords = new System.Windows.Forms.ListView();
-            this.chWords = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             ((System.ComponentModel.ISupportInitialize)(this.pcbxBoggleTitle)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pcbxBoggleSet)).BeginInit();
             this.pnlInstructions.SuspendLayout();
@@ -177,6 +177,22 @@
             this.pnlGameDisplay.TabIndex = 8;
             this.pnlGameDisplay.Visible = false;
             // 
+            // lvUserWords
+            // 
+            this.lvUserWords.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.chWords});
+            this.lvUserWords.HideSelection = false;
+            this.lvUserWords.Location = new System.Drawing.Point(513, 112);
+            this.lvUserWords.Name = "lvUserWords";
+            this.lvUserWords.Size = new System.Drawing.Size(182, 369);
+            this.lvUserWords.TabIndex = 14;
+            this.lvUserWords.UseCompatibleStateImageBehavior = false;
+            this.lvUserWords.View = System.Windows.Forms.View.Details;
+            // 
+            // chWords
+            // 
+            this.chWords.Text = "Words:";
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -286,22 +302,6 @@
             this.txtEnterWords.Size = new System.Drawing.Size(150, 29);
             this.txtEnterWords.TabIndex = 0;
             // 
-            // lvUserWords
-            // 
-            this.lvUserWords.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.chWords});
-            this.lvUserWords.HideSelection = false;
-            this.lvUserWords.Location = new System.Drawing.Point(513, 112);
-            this.lvUserWords.Name = "lvUserWords";
-            this.lvUserWords.Size = new System.Drawing.Size(182, 369);
-            this.lvUserWords.TabIndex = 14;
-            this.lvUserWords.UseCompatibleStateImageBehavior = false;
-            this.lvUserWords.View = System.Windows.Forms.View.Details;
-            // 
-            // chWords
-            // 
-            this.chWords.Text = "Words:";
-            // 
             // frmBoggle
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -317,6 +317,7 @@
             this.Controls.Add(this.btnQuit);
             this.Controls.Add(this.btnPlay);
             this.Name = "frmBoggle";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Play Boggle NOW!";
             ((System.ComponentModel.ISupportInitialize)(this.pcbxBoggleTitle)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pcbxBoggleSet)).EndInit();

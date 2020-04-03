@@ -139,7 +139,9 @@ namespace Boggle
             txtEnterWords.Invoke(new Action(() => txtEnterWords.Enabled = false));
             btnSubmit.Invoke(new Action(() => btnSubmit.Enabled = false));
 
-            MessageBox.Show("", "", MessageBoxButtons.OK);
+            string finalScore = Board.results();
+
+            MessageBox.Show(finalScore, "Final Score", MessageBoxButtons.OK);
 
         }
 
