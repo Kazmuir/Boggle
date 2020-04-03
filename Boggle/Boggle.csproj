@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="APIDictionaryClass.cs" />
     <Compile Include="InternalBoardClass.cs" />
     <Compile Include="RandomLettersClass.cs" />
     <Compile Include="PlayerClass.cs" />

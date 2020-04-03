@@ -194,11 +194,21 @@ namespace Boggle
             }
             else
             {
-                ListViewItem word = new ListViewItem(txtEnterWords.Text, 0);
-                lvUserWords.Items.Add(word);
-                Board.buildWordList(txtEnterWords.Text);
-                txtEnterWords.Clear();
-                txtEnterWords.Focus();
+                ListViewItem duplicate = lvUserWords.FindItemWithText(txtEnterWords.Text); //Check if word is already present on list
+                if (duplicate == null)
+                {
+                    ListViewItem word = new ListViewItem(txtEnterWords.Text, 0);
+                    lvUserWords.Items.Add(word);
+                    Board.buildWordList(txtEnterWords.Text);
+                    txtEnterWords.Clear();
+                    txtEnterWords.Focus();
+                }
+                else
+                {
+                    MessageBox.Show("You have already entered that word!",
+                    "Word already submitted.",
+                    MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                }
             }
         }
 
@@ -206,11 +216,12 @@ namespace Boggle
         {
             turnTimer.Stop();
             countDown = 60;
-            lvUserWords.Clear();
+            lvUserWords.Items.Clear();
             pnlBoard.Visible = false;
             pnlBoard.Controls.Clear();
+            Board.resetAttributes();
             createBoggleBoardOnForm();
-            //setTimer();
+            
         }
 
         private void clearBoard(object sender, System.EventArgs e) //Remove buttons from board so new ones can be created.

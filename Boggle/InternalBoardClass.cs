@@ -21,7 +21,7 @@ namespace Boggle
         List<String> board; //holds the 16 characters that make up the current boggle board.
         int score;
 
-        public InternalBoardClass() //empty default constructor
+        public InternalBoardClass() // constructor
         {
             userWords = new List<string> { };
             outputs = new List<string> { };
@@ -270,5 +270,12 @@ namespace Boggle
             
         }
 
+        public void resetAttributes() //clear all attributes for new game
+        {
+            userWords.Clear();
+            outputs.Clear();
+            board.Clear();
+            score = 0;
+        }
     }
 }
