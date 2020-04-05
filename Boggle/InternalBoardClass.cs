@@ -16,7 +16,10 @@ namespace Boggle
 {
     class InternalBoardClass
     {
+        APIDictionaryClass API = new APIDictionaryClass();
+
         List<String> userWords; //store words the player has entered during the gameplay
+        List<String> validUserWords; //Words confirmed to be real after checking with API
         List<string> outputs; //used at the end to give the player information on the words that they used.
         List<String> board; //holds the 16 characters that make up the current boggle board.
         int score;
@@ -24,6 +27,7 @@ namespace Boggle
         public InternalBoardClass() // constructor
         {
             userWords = new List<string> { };
+            validUserWords = new List<string> { };
             outputs = new List<string> { };
             board = new List<string> { };
             score = 0;
@@ -39,34 +43,48 @@ namespace Boggle
             userWords.Add(word);
         }
 
+        public void checkWordValidity() //Check the status code: if 200 (successful request) this means the word exists.
+        {
+            for(int i = 0; i < userWords.Count; i++)
+            {
+                int responseStatus;
+                responseStatus = API.GetDefine(userWords[i]);
+                if (responseStatus == 200)
+                {
+                    validUserWords.Add(userWords[i]);
+                }
+            }
+        }
+
         public string results() // the begining of the end. When the timer reaches zero this method will loop through the userWords list and find if the word is valid or not.
         {
+            checkWordValidity();
             string resultMessage = "";
 
-            for (int i = 0; i < userWords.Count; i++)
+            for (int i = 0; i < validUserWords.Count; i++)
             {
-                if (firstLetter(userWords[i]) == true)
+                if (firstLetter(validUserWords[i]) == true)
                 {
-                    int wS = calculateScore(userWords[i]);
+                    int wS = calculateScore(validUserWords[i]);
 
                     if(resultMessage == "")
                     {
-                        resultMessage += userWords[i] + "\t" + wS.ToString();
+                        resultMessage += validUserWords[i] + "\t" + wS.ToString();
                     }
                     else
                     {
-                        resultMessage += "\n" + userWords[i] + "\t" + wS.ToString();
+                        resultMessage += "\n" + validUserWords[i] + "\t" + wS.ToString();
                     }
                 }
                 else
                 {
                     if (resultMessage == "")
                     {
-                        resultMessage += userWords[i] + "\t Word not found";
+                        resultMessage += validUserWords[i] + "\t Word not found";
                     }
                     else
                     {
-                        resultMessage += "\n" + userWords[i] + "\t Word not found";
+                        resultMessage += "\n" + validUserWords[i] + "\t Word not found";
                     }
                 }
             }
@@ -283,6 +301,7 @@ namespace Boggle
         public void resetAttributes() //clear all attributes for new game
         {
             userWords.Clear();
+            validUserWords.Clear();
             outputs.Clear();
             board.Clear();
             score = 0;

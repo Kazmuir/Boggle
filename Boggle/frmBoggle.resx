@@ -119,7 +119,7 @@
   </resheader>
   <data name="lblInstructions.Text" xml:space="preserve">
     <value>How To Play: 
-- You will have 3 minutes to find as many words as possible on the grid. 
+- You will have 1 minute to find as many words as possible on the grid. 
 - You can move from one letter to another if it is a neighbour (in all directions).
 - You cannot use a letter (dice) more than once in a word. 
 - You get points for each word - the more letters the better.</value>
