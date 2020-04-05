@@ -30,8 +30,6 @@ namespace Boggle
         // Constants
         private const int BOGGLEBOARDSIZE = 4;
 
-        string wordList = ""; // just used to display all the words entered by the user
-
         // Total width and height of a board cell
         int barWidth = 2; // Width or thickness of horizontal and vertical bars
         int padding = 5;
